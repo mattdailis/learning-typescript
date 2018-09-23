@@ -3,11 +3,15 @@ starts a development server with hot module reloading and source maps.
 
 For production, use `yarn build`. 
 
+To check for linting errors, run `yarn lint` and to autofix the ones that are autofixable, `yarn fix`.
+
+Run `yarn typecheck` to run the typescript checker.
+
 # Toolchain:
 - Package manager: yarn
 - Bundler: webpack
 - Compiler: Typescript
-- Linter: TSLint (TODO)
+- Linter: TSLint
 
 # Project structure
 Eventually, all configuration should go in a /config directory.
