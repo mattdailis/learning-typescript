@@ -44,6 +44,8 @@ down to one or more (TODO should this just be one?) components.
 A *View* is a concept from *Single-Page-Applications* that is a _Stateless Functional Component_ (TODO is this true?) that defines the layout of some
 number of containers and components in a page.
 
+TODO make scripts that generate each of these.
+
 # Routing and State management
 This project will be a *Single-Page-Application* with simulated routing. This means that the entire website is loaded from the get-go, and
 navigation inside it is merely updating React views. 

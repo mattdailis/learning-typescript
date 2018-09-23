@@ -6,7 +6,6 @@ const World = () => {
       Hello World
     </div>
   );
-}
+};
 
 export default World;
-  
