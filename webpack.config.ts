@@ -1,18 +1,18 @@
 const path = require('path'),
     webpack = require('webpack'),
-    HtmlWebpackPlugin = require('html-webpack-plugin');
-    UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-    CleanupPlugin = require('webpack-cleanup-plugin');
+    HtmlWebpackPlugin = require('html-webpack-plugin'),
+    UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
+    CleanupPlugin = require('webpack-cleanup-plugin'),
 
-    NODE_ENV = process.env.NODE_ENV
-    __DEV__ = NODE_ENV === 'development';
-    __PROD__ = NODE_ENV === 'production';
-    __TEST__ = NODE_ENV === 'test';
+    NODE_ENV = process.env.NODE_ENV,
+    __DEV__ = NODE_ENV === 'development',
+    __PROD__ = NODE_ENV === 'production',
+    __TEST__ = NODE_ENV === 'test',
     //__COVERAGE__ = !argv.watch && __TEST__;
-    __BASENAME__ = JSON.stringify(process.env.BASENAME || '');    
-    ROOT = path.resolve(__dirname);
-    DIST = path.join(ROOT, 'build');
-    SRC = path.join(ROOT, 'src/app');
+    __BASENAME__ = JSON.stringify(process.env.BASENAME || ''),
+    ROOT = path.resolve(__dirname),
+    DIST = path.join(ROOT, 'build'),
+    SRC = path.join(ROOT, 'src/app'),
     PROJECT_PUBLIC_PATH = '/';
 
 var debug = require('debug')('app:config:webpack');
@@ -22,7 +22,7 @@ var webpackConfig = {
     name: 'client',
     target: 'web',
     mode: __PROD__ ? 'production' : 'development',
-    //devtool: 'source-map',
+    devtool: 'source-map',
     resolve: {
         modules: [ SRC, 'node_modules' ],
         //extensions: ['.ts', 'tsx', '.js', '.json']
