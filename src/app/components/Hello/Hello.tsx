@@ -1,10 +1,9 @@
 import * as React from 'react'
+import World from '@Components/World'
 
 const Hello = () => {
   return (
-    <div>
-      Hello world
-    </div>
+    <World />
   );
 }
 

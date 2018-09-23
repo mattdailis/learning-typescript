@@ -26,7 +26,11 @@ var webpackConfig = {
     resolve: {
         modules: [ SRC, 'node_modules' ],
         //extensions: ['.ts', 'tsx', '.js', '.json']
-        extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
+        extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
+        alias: {
+            "@Components": path.join(SRC, 'components'),
+            "@Containers": path.join(SRC, 'containers')
+        }
     },
     module: {
         rules: [
@@ -89,22 +93,22 @@ if (__DEV__) {
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoEmitOnErrorsPlugin()
     )
-  } else if (__PROD__) {
+} else if (__PROD__) {
     debug('Enabling plugins for production (OccurrenceOrder & UglifyJS).')
     webpackConfig.plugins.push(
-      new webpack.optimize.OccurrenceOrderPlugin(),
-      new UglifyJSPlugin({
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new UglifyJSPlugin({
         uglifyOptions: {
-          compress: {
+            compress: {
             unused: true,
             dead_code: true,
             warnings: false
-          }
+            }
         }
-      }),
-      new webpack.optimize.AggressiveMergingPlugin()
+        }),
+        new webpack.optimize.AggressiveMergingPlugin()
     )
-  }
+}
 
 // Optimization
 if (!__TEST__) {

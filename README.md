@@ -20,3 +20,15 @@ The point is to minimize the number of relative imports in the project. The poli
 one hop away. (Ex: `import _ from './Hello'` is okay. `'import _ from '../Hello'` and `import _ from 'something/Hello'` are not okay)
 
 This policy is subject to change as development actually starts.
+
+For now, the aliases defined are `@Components` and `@Containers`
+
+## Adding new Components
+Every component must have its own folder. The structure of this folder is as follows:
+
+    src/app/components/
+    ├── Hello
+    │   ├── Hello.tsx
+    │   └── index.tsx
+
+TODO figure out where tests should go. Options are a `Hello.test.tsx` file, or a `__tests__` folder in the `Hello` directory.
