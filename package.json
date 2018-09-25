@@ -9,9 +9,13 @@
     "start": "yarn dev",
     "lint": "yarn tslint -c ./tslint.json './src/**/*.ts*'",
     "fix": "yarn tslint -c ./tslint.json './src/**/*.ts*' --fix",
-    "typecheck": "yarn tsc --noemit"
+    "typecheck": "yarn tsc --noemit",
+    
+    "crcf": "node ./scripts/crcf/index.js",
+    "new-container": "yarn crcf"
   },
   "dependencies": {
+    "create-react-component-folder": "file:./scripts/crcf",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "typescript": "^3.0.3"
@@ -19,7 +23,6 @@
   "devDependencies": {
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
-    "create-react-component-folder": "^0.1.25",
     "cross-env": "^5.2.0",
     "html-webpack-plugin": "^3.2.0",
     "source-map-loader": "^0.2.4",

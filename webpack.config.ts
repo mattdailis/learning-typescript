@@ -8,75 +8,76 @@ const path = require('path'),
     __DEV__ = NODE_ENV === 'development',
     __PROD__ = NODE_ENV === 'production',
     __TEST__ = NODE_ENV === 'test',
-    //__COVERAGE__ = !argv.watch && __TEST__;
+    // __COVERAGE__ = !argv.watch && __TEST__;
     __BASENAME__ = JSON.stringify(process.env.BASENAME || ''),
     ROOT = path.resolve(__dirname),
     DIST = path.join(ROOT, 'build'),
     SRC = path.join(ROOT, 'src/app'),
     PROJECT_PUBLIC_PATH = '/';
 
-var debug = require('debug')('app:config:webpack');
+let debug = require('debug')('app:config:webpack');
 
 // Base Configuration
-var webpackConfig = {
-    name: 'client',
-    target: 'web',
+let webpackConfig = {
+    devtool: __DEV__ ? 'source-map' : '',
     mode: __PROD__ ? 'production' : 'development',
-    devtool: 'source-map',
-    resolve: {
-        modules: [ SRC, 'node_modules' ],
-        //extensions: ['.ts', 'tsx', '.js', '.json']
-        extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
-        alias: {
-            "@Components": path.join(SRC, 'components'),
-            "@Containers": path.join(SRC, 'containers')
-        }
-    },
     module: {
         rules: [
             {
-                test: /\.(ts|tsx)$/,
                 loader: 'ts-loader',
                 options: {
-                    transpileOnly: true,
                     experimentalWatchApi: true,
+                    transpileOnly: true,
                 },
+                test: /\.(ts|tsx)$/,
+
             },
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader", exclude: [path.join(ROOT, 'node_modules')] }
-        ]
+            { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader', exclude: [path.join(ROOT, 'node_modules')] },
+        ],
     },
+    name: 'client',
+    resolve: {
+        alias: {
+            '@Components': path.join(SRC, 'components'),
+            '@Containers': path.join(SRC, 'containers'),
+        },
+        extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
+        modules: [ SRC, 'node_modules' ],
+    },
+    target: 'web',
     // To make typescript happy
+    // tslint:disable-next-line:object-literal-sort-keys
     entry: undefined,
     output: undefined,
     plugins: undefined,
-    optimization: undefined
+    optimization: undefined,
 };
-  
+
 // Entry
 const APP_ENTRY = path.join(SRC, 'App.tsx');
 webpackConfig.entry = {
-    app: [APP_ENTRY]
+    app: [APP_ENTRY],
 };
 
 // Output
 webpackConfig.output = {
-    path: DIST,
     filename: '[name].[hash].bundle.js',
+    path: DIST,
     pathinfo: false,
-    publicPath: PROJECT_PUBLIC_PATH
-}
+    publicPath: PROJECT_PUBLIC_PATH,
+};
 
 // Plugins
 webpackConfig.plugins = [
     // new webpack.DefinePlugin(GLOBALS), // If the GLOBALS object is defined, source will be able to use these values
-    //new CleanupPlugin(),
+    // new CleanupPlugin(),
     new HtmlWebpackPlugin({
-        template: path.join(SRC, 'index.html'),
+        filename: 'index.html',
         hash: false,
         // favicon: path.join(SRC, 'favicon.ico'),
-        filename: 'index.html',
         inject: 'body',
-        minify: { collapseWhitespace: true }
+        minify: { collapseWhitespace: true },
+        template: path.join(SRC, 'index.html'),
         }),
     // new CopyWebpackPlugin([
     //   { from: 'src/images', to: 'images' },
@@ -85,34 +86,34 @@ webpackConfig.plugins = [
 ];
 
 if (__DEV__) {
-    debug('Enabling plugins for live development (HMR, NoErrors).')
+    debug('Enabling plugins for live development (HMR, NoErrors).');
     webpackConfig.plugins.push(
-      new webpack.NoEmitOnErrorsPlugin()
-    )
+      new webpack.NoEmitOnErrorsPlugin(),
+    );
 } else if (__PROD__) {
-    debug('Enabling plugins for production (OccurrenceOrder & UglifyJS).')
+    debug('Enabling plugins for production (OccurrenceOrder & UglifyJS).');
     webpackConfig.plugins.push(
         new webpack.optimize.OccurrenceOrderPlugin(),
         new UglifyJSPlugin({
         uglifyOptions: {
             compress: {
-            unused: true,
-            dead_code: true,
-            warnings: false
-            }
-        }
+                dead_code: true,
+                unused: true,
+                warnings: false,
+            },
+        },
         }),
-        new webpack.optimize.AggressiveMergingPlugin()
-    )
+        new webpack.optimize.AggressiveMergingPlugin(),
+    );
 }
 
 // Optimization
 if (!__TEST__) {
     webpackConfig.optimization = {
         splitChunks: {
-            chunks: 'all'
-        }
-    }
+            chunks: 'all',
+        },
+    };
 }
 
 module.exports = webpackConfig;

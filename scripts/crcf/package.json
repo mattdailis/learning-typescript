@@ -1,0 +1,22 @@
+{
+    "name": "create-react-component-folder",
+    "version": "or-modified",
+    "description": "Creates single react component folder structure",
+    "main": "./lib/index",
+    "engines": {
+        "npm": ">=5.2.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/snaerth/create-react-component-folder"
+    },
+    "author": "Snær Seljan Þóroddsson",
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "^2.4.1",
+        "commander": "^2.17.1",
+        "fs": "0.0.1-security",
+        "log-update": "^2.3.0",
+        "mkdirp": "^0.5.1"
+    }
+}
