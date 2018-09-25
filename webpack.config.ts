@@ -54,17 +54,14 @@ var webpackConfig = {
   
 // Entry
 const APP_ENTRY = path.join(SRC, 'App.tsx');
-const WEBPACK_DEV_SERVER = `webpack-dev-server/client?path=${PROJECT_PUBLIC_PATH}`
 webpackConfig.entry = {
-    app: __DEV__
-      ? [WEBPACK_DEV_SERVER, APP_ENTRY]
-      : [APP_ENTRY]
+    app: [APP_ENTRY]
 };
 
 // Output
 webpackConfig.output = {
     path: DIST,
-    filename: 'js/[name].[hash].bundle.js',
+    filename: '[name].[hash].bundle.js',
     pathinfo: false,
     publicPath: PROJECT_PUBLIC_PATH
 }
@@ -90,7 +87,6 @@ webpackConfig.plugins = [
 if (__DEV__) {
     debug('Enabling plugins for live development (HMR, NoErrors).')
     webpackConfig.plugins.push(
-      new webpack.HotModuleReplacementPlugin(),
       new webpack.NoEmitOnErrorsPlugin()
     )
 } else if (__PROD__) {

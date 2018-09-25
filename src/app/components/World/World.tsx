@@ -3,7 +3,7 @@ import * as React from 'react';
 const World = () => {
   return (
     <div>
-      Hello World
+      Hello World and stuff
     </div>
   );
 };
