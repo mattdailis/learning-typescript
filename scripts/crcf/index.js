@@ -25,6 +25,10 @@ const ROOT_DIR = process.cwd();
 // Grab provided args
 let [, , ...args] = process.argv;
 
+function list(val) {
+  return val.split(',');
+}
+
 // Set command line interface options for cli
 program
   .version('0.1.0')
@@ -33,10 +37,12 @@ program
   .option('--createindex', 'Creates index.js file for multple component imports')
   .option('-f, --functional', 'Creates React stateless functional component')
   .option('-u, --uppercase', 'Component files start on uppercase letter')
+  .option('--dir <dir>', 'Define a root directory for the new component folder')
+  .option('--name <name>', 'The names of the component to be generated', list)
   .parse(process.argv);
 
 // Remove Node process args options
-args = removeOptionsFromArgs(args);
+args = program.args//removeOptionsFromArgs(args);
 
 /**
  * Creates files for component
@@ -46,7 +52,7 @@ args = removeOptionsFromArgs(args);
  */
 function createFiles(componentName, componentPath) {
   const {
-    reactnative, jsx, notest, uppercase, functional,
+    reactnative, notest, uppercase, functional,
   } = program;
 
   return new Promise((resolve) => {
@@ -124,7 +130,7 @@ function createFiles(componentName, componentPath) {
           }
         }
 
-        Promise.all(promises).then(() => resolve(files));
+        Promise.all(promises).then(() => resolve(files.map(file => path.join(componentPath, file))));
       })
       .catch((e) => {
         logger.error(e);
@@ -143,7 +149,7 @@ function initialize() {
   const promises = [];
   // Set component name, path and full path
   const componentPath = path.join(ROOT_DIR, args[0]);
-  const folderPath = getComponentParentFolder(componentPath);
+  const folderPath = path.join(ROOT_DIR, program.dir); // getComponentParentFolder(componentPath);
 
   if (program.createindex === true) {
     createMultiIndex(componentPath);
@@ -160,11 +166,9 @@ function initialize() {
     .then(() => {
       logger.animateStart('Creating components files...');
 
-      const cssFileExt = null;
-
       for (let i = 0; i < args.length; i += 1) {
         const name = getComponentName(args[i]);
-        promises.push(createFiles(name, folderPath + name, cssFileExt));
+        promises.push(createFiles(name, path.join(folderPath, args[i])));
       }
 
       return Promise.all(promises);

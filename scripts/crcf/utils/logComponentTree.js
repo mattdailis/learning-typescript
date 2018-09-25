@@ -1,4 +1,5 @@
 const logger = require('../logger');
+const path = require('path');
 
 /**
  * Creates and logs component file tree
@@ -10,11 +11,13 @@ function logComponentTree(filesArrData, folderPath) {
   for (let i = 0; i < filesArrData.length; i += 1) {
     const name = filesArrData[i][1];
     const filesArr = filesArrData[i];
-    logger.log(folderPath + name.substring(0, name.lastIndexOf('.')));
+    const folderPath = path.dirname(name);
+    logger.log(path.relative(process.cwd(), folderPath));
 
     // Log files
     for (let j = 0; j < filesArr.length; j += 1) {
-      logger.log(`  └─ ${filesArr[j]}`);
+      const fileName = path.basename(name);
+      logger.log(`  └─ ${fileName}`);
     }
   }
 }
