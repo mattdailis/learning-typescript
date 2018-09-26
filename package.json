@@ -5,14 +5,17 @@
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --content-base ./dist --hot --inline --colors --port 3030 --open --history-api-fallback",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --colors --port 3030 --open --history-api-fallback",
     "start": "yarn dev",
     "lint": "yarn tslint -c ./tslint.json './src/**/*.ts*'",
     "fix": "yarn tslint -c ./tslint.json './src/**/*.ts*' --fix",
     "typecheck": "yarn tsc --noemit",
-    "test": "jest"
+    "test": "jest",
+    "crcf": "node ./scripts/crcf/index.js",
+    "new-container": "yarn crcf"
   },
   "dependencies": {
+    "create-react-component-folder": "file:./scripts/crcf",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "typescript": "^3.0.3"
@@ -21,7 +24,6 @@
     "@types/jest": "^23.3.2",
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
-    "create-react-component-folder": "^0.1.25",
     "cross-env": "^5.2.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
