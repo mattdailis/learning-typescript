@@ -36,7 +36,7 @@ export default ${name};
 function createReactFunctionalComponent(componentName) {
   const name = capitalizeFirstLetter(componentName);
 
-  return `import React from 'react';
+  return `import * as React from 'react';
 
 const ${name} = () => {
   return (
@@ -260,15 +260,17 @@ function createTest(componentName, upperCase, isTypeScript) {
   const componentNameUpperCase = capitalizeFirstLetter(componentName);
 
   return `import ${isTypeScript ? '* as' : ''} React from 'react';
-import { shallow } from 'enzyme';
+import * as ShallowRenderer from 'react-test-renderer/shallow';
 import ${componentNameUpperCase} from './${
   upperCase === true ? componentNameUpperCase : componentName
 }';
 
 describe('<${componentNameUpperCase} />', () => {
   test('renders', () => {
-    const wrapper = shallow(<${componentNameUpperCase} />);
-    expect(wrapper).toMatchSnapshot();
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(<${componentNameUpperCase} />)
+    const result = renderer.getRenderOutput();
+    expect(result).toMatchSnapshot();
   });
 });
   `;
