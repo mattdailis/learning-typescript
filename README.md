@@ -78,3 +78,5 @@ allows you to write arbitrary css, so this is not limiting in any way.
 Testing will be done using jest and the react-test-renderer. The default code-generating scripts use [snapshot testing](https://jestjs.io/docs/en/snapshot-testing)
 
 # TODO How to use Typescript in all of this
+
+TODO linter should be stricter about the use of the any type
