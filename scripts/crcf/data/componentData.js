@@ -44,10 +44,9 @@ const ${name} = () => {
       ${name}
     </div>
   );
-}
+};
 
-export default ${name};
-  `;
+export default ${name};\n`;
 }
 
 /**
@@ -72,8 +71,7 @@ class ${name} extends Component {
   }
 }
 
-export default ${name};
-  `;
+export default ${name};\n`;
 }
 
 /**
@@ -98,8 +96,7 @@ class ${name} extends React.Component<any, any>  {
   }
 }
 
-export default ${name};
-  `;
+export default ${name};\n`;
 }
 
 /**
@@ -123,8 +120,7 @@ class ${name} extends React.Component<any, any>  {
   }
 }
 
-export default ${name};
-  `;
+export default ${name};\n`;
 }
 
 /**
@@ -263,17 +259,16 @@ function createTest(componentName, upperCase, isTypeScript) {
 import * as ShallowRenderer from 'react-test-renderer/shallow';
 import ${componentNameUpperCase} from './${
   upperCase === true ? componentNameUpperCase : componentName
-}';
+};';
 
 describe('<${componentNameUpperCase} />', () => {
   test('renders', () => {
     const renderer = ShallowRenderer.createRenderer();
-    renderer.render(<${componentNameUpperCase} />)
+    renderer.render(<${componentNameUpperCase} />);
     const result = renderer.getRenderOutput();
     expect(result).toMatchSnapshot();
   });
-});
-  `;
+});\n`;
 }
 
 module.exports = {
