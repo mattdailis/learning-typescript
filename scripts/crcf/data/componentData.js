@@ -247,6 +247,8 @@ export default ${name};
 /**
  * Creates default test file for component
  *
+ * Assume that tests are located in a __tests__ directory one level below the component being tested
+ * 
  * @param {String} componentName - Component name
  * @param {Boolean} upperCase - If true then capitalize first letter
  * @param {Boolean} isTypeScript - Boolean check for Typescript
@@ -257,7 +259,7 @@ function createTest(componentName, upperCase, isTypeScript) {
 
   return `import ${isTypeScript ? '* as' : ''} React from 'react';
 import * as ShallowRenderer from 'react-test-renderer/shallow';
-import ${componentNameUpperCase} from './${
+import ${componentNameUpperCase} from '../${
   upperCase === true ? componentNameUpperCase : componentName
 }';
 

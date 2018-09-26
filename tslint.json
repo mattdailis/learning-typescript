@@ -6,7 +6,9 @@
     "jsRules": {},
     "rules": {
         "quotemark": [true, "single"],
-        "linebreak-style": [true, "LF"]
+        "linebreak-style": [true, "LF"],
+        "interface-name": [true, "never-prefix"],
+        "no-unsafe-any": true
     },
     "rulesDirectory": []
 }
