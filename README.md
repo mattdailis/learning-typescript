@@ -12,6 +12,7 @@ Run `yarn typecheck` to run the typescript checker.
 - Bundler: webpack
 - Compiler: Typescript
 - Linter: TSLint
+- Test framework: Jest
 
 # Project structure
 Eventually, all configuration should go in a /config directory.
@@ -31,10 +32,11 @@ For now, the aliases defined are `@Components` and `@Containers`
 ## Adding new Components
 Every component must have its own folder. The structure of this folder is as follows:
 
-    src/app/components/
-    ├── Hello
-    │   ├── Hello.tsx
-    │   └── index.tsx
+        src/app/components/Hello
+        └─ index.tsx
+        └─ Hello.tsx
+        └─ Hello.test.tsx
+
 
 TODO figure out where tests should go. Options are a `Hello.test.tsx` file, or a `__tests__` folder in the `Hello` directory.
 
@@ -48,7 +50,17 @@ down to one or more (TODO should this just be one?) components.
 A *View* is a concept from *Single-Page-Applications* that is a _Stateless Functional Component_ (TODO is this true?) that defines the layout of some
 number of containers and components in a page.
 
-TODO make scripts that generate each of these.
+# Creating new Components
+
+The `scripts/crcf` module allows generation of react component folders (copied and repurposed from [here](https://www.npmjs.com/package/create-react-component-folder)).
+
+There are yarn scripts defined for this purpose. 
+
+`yarn new-component` creates a new stateless functional component in the components directory.
+
+`yarn new-container` creates a class-based component in the containers directory
+
+TODO create view.
 
 # Routing and State management
 This project will be a *Single-Page-Application* with simulated routing. This means that the entire website is loaded from the get-go, and
@@ -60,5 +72,9 @@ TODO Do we want redux? Or GraphQL? Or something else?
 TODO All styling will be done using the `styled-components` library. There will be no `.css` or `.sass` files. The reasoning is that `styled-components` provides
 a hierarchy for the styles based on components. There are no weird global behaviors as would normally occur with css. The `styled-components` library still
 allows you to write arbitrary css, so this is not limiting in any way.
+
+# Testing 
+
+Testing will be done using jest and the react-test-renderer. The default code-generating scripts use [snapshot testing](https://jestjs.io/docs/en/snapshot-testing)
 
 # TODO How to use Typescript in all of this
