@@ -16,7 +16,7 @@ function logComponentTree(filesArrData, folderPath) {
 
     // Log files
     for (let j = 0; j < filesArr.length; j += 1) {
-      const fileName = path.basename(filesArr[j]);
+      const fileName = path.relative(folderPath, filesArr[j]);
       logger.log(`  └─ ${fileName}`);
     }
   }

@@ -14,7 +14,6 @@ const {
 } = require('./data/componentData');
 const stringHelper = require('./utils/stringHelper');
 const { getComponentName, getComponentParentFolder } = require('./utils/componentsHelpers.js');
-const removeOptionsFromArgs = require('./utils/removeOptionsFromArgs');
 const createMultiIndex = require('./utils/createMultiIndex');
 const logComponentTree = require('./utils/logComponentTree');
 const validateArguments = require('./utils/validateArguments');
@@ -66,7 +65,7 @@ function createFiles(componentName, componentPath) {
     const files = [indexFile, componentFileName];
 
     if (!notest) {
-      files.push(`${name}.test.${ext}`);
+      files.push(path.join('__tests__', `${name}.test.${ext}`));
     }
 
     if (uppercase) {
@@ -80,7 +79,7 @@ function createFiles(componentName, componentPath) {
     }
 
     // Create component folder
-    fs.createDirectories(componentPath)
+    fs.createDirectories(path.join(componentPath, '__tests__'))
       .then(() => {
         // Create index.js
         const promises = [];
