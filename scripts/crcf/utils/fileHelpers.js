@@ -67,7 +67,7 @@ function existsSyncAsync(path) {
  * Native async / await for creating directorys in node
  * @param {String} dir - directorys path
  */
-function createDirectorys(dir) {
+function createDirectories(dir) {
   return new Promise((resolve, reject) => {
     try {
       return fs.exists(dir, (exists) => {
@@ -111,6 +111,6 @@ module.exports = {
   writeFileAsync,
   readDirAsync,
   existsSyncAsync,
-  createDirectorys,
+  createDirectories,
   isDirectory,
 };

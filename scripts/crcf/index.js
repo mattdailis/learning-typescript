@@ -80,7 +80,7 @@ function createFiles(componentName, componentPath) {
     }
 
     // Create component folder
-    fs.createDirectorys(componentPath)
+    fs.createDirectories(componentPath)
       .then(() => {
         // Create index.js
         const promises = [];
