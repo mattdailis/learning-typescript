@@ -259,7 +259,7 @@ function createTest(componentName, upperCase, isTypeScript) {
 import * as ShallowRenderer from 'react-test-renderer/shallow';
 import ${componentNameUpperCase} from './${
   upperCase === true ? componentNameUpperCase : componentName
-};';
+}';
 
 describe('<${componentNameUpperCase} />', () => {
   test('renders', () => {
