@@ -37,7 +37,7 @@ program
   .option('--createindex', 'Creates index.js file for multple component imports')
   .option('-f, --functional', 'Creates React stateless functional component')
   .option('-u, --uppercase', 'Component files start on uppercase letter')
-  .option('--dir <dir>', 'Define a root directory for the new component folder')
+  .option('--dir <dir>', 'Define a root directory for the new component folder', '.')
   .option('--name <name>', 'The names of the component to be generated', list)
   .parse(process.argv);
 
