@@ -12,7 +12,8 @@
     "typecheck": "yarn tsc --noemit",
     "test": "jest",
     "crcf": "node ./scripts/crcf/index.js",
-    "new-container": "yarn crcf"
+    "new-container": "yarn crcf -u  --dir ./src/app/containers",
+    "new-component": "yarn crcf -uf --dir ./src/app/components"
   },
   "dependencies": {
     "create-react-component-folder": "file:./scripts/crcf",
