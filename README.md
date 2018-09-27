@@ -66,6 +66,8 @@ TODO create view.
 This project will be a *Single-Page-Application* with simulated routing. This means that the entire website is loaded from the get-go, and
 navigation inside it is merely updating React views. 
 
+https://www.kirupa.com/react/creating_single_page_app_react_using_react_router.htm
+
 TODO Do we want redux? Or GraphQL? Or something else?
 
 # Styling
@@ -80,3 +82,5 @@ Testing will be done using jest and the react-test-renderer. The default code-ge
 # TODO How to use Typescript in all of this
 
 TODO linter should be stricter about the use of the any type
+
+[Thoughts on architecture](https://hackernoon.com/architecting-single-page-applications-b842ea633c2e)
