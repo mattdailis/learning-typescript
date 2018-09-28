@@ -79,8 +79,16 @@ allows you to write arbitrary css, so this is not limiting in any way.
 
 Testing will be done using jest and the react-test-renderer. The default code-generating scripts use [snapshot testing](https://jestjs.io/docs/en/snapshot-testing)
 
+For components, snapshot testing will be sufficient, since all they do is render themselves. (Perhaps make multiple snapshot tests if they're supposed to render differently based on props?).
+
+For containers, all methods must be tested.
+
 # TODO How to use Typescript in all of this
 
 TODO linter should be stricter about the use of the any type
 
 [Thoughts on architecture](https://hackernoon.com/architecting-single-page-applications-b842ea633c2e)
+
+Jotting down a thought: To make this work with React Native, would make a separate react-native-components folder which would be a duplicate of the components folder with
+react-native specific styling. Then it would be a *configurations* change, where the @Components alias would now point to the react-native-components folder, and
+(naively, optimistically) that would be it. 
