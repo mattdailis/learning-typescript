@@ -1,25 +1,26 @@
-const path = require('path'),
-    webpack = require('webpack'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
-    UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
-    CleanupPlugin = require('webpack-cleanup-plugin'),
+import Debug from 'debug';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from 'path';
+import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
+import webpack from 'webpack';
+// import CleanupPlugin from 'webpack-cleanup-plugin';
 
-    NODE_ENV = process.env.NODE_ENV,
-    __DEV__ = NODE_ENV === 'development',
-    __PROD__ = NODE_ENV === 'production',
-    __TEST__ = NODE_ENV === 'test',
-    // __COVERAGE__ = !argv.watch && __TEST__;
-    __BASENAME__ = JSON.stringify(process.env.BASENAME || ''),
-    ROOT = path.resolve(__dirname),
-    DIST = path.join(ROOT, 'build'),
-    SRC = path.join(ROOT, 'src/app'),
-    PROJECT_PUBLIC_PATH = '/';
+const NODE_ENV = process.env.NODE_ENV;
+const __DEV__  = NODE_ENV === 'development';
+const __PROD__ = NODE_ENV === 'production';
+const __TEST__ = NODE_ENV === 'test';
+// const __COVERAGE__ = !argv.watch && __TEST__;
+const __BASENAME__ = JSON.stringify(process.env.BASENAME || '');
+const ROOT = path.resolve(__dirname);
+const DIST = path.join(ROOT, 'build');
+const SRC = path.join(ROOT, 'src/app');
+const PROJECT_PUBLIC_PATH = '/';
 
-let debug = require('debug')('app:config:webpack');
+const debug = Debug('app:config:webpack');
 
 // Base Configuration
-let webpackConfig = {
-    devtool: __DEV__ ? 'source-map' : '',
+const webpackConfig: webpack.Configuration = {
+    devtool: __DEV__ ? 'source-map' : null,
     mode: __PROD__ ? 'production' : 'development',
     module: {
         rules: [
@@ -45,12 +46,12 @@ let webpackConfig = {
         modules: [ SRC, 'node_modules' ],
     },
     target: 'web',
-    // To make typescript happy
-    // tslint:disable-next-line:object-literal-sort-keys
-    entry: undefined,
-    output: undefined,
-    plugins: undefined,
-    optimization: undefined,
+    // // To make typescript happy
+    // // tslint:disable-next-line:object-literal-sort-keys
+    // entry: undefined,
+    // output: undefined,
+    // plugins: undefined,
+    // optimization: undefined,
 };
 
 // Entry
@@ -93,7 +94,7 @@ if (__DEV__) {
 } else if (__PROD__) {
     debug('Enabling plugins for production (OccurrenceOrder & UglifyJS).');
     webpackConfig.plugins.push(
-        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(false),
         new UglifyJSPlugin({
         uglifyOptions: {
             compress: {

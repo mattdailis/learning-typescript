@@ -8,7 +8,8 @@
         "quotemark": [true, "single"],
         "linebreak-style": [true, "LF"],
         "interface-name": [true, "never-prefix"],
-        "no-unsafe-any": true
+        "no-unsafe-any": true,
+        "arrow-parens": [true, "ban-single-arg-parens"]
     },
     "rulesDirectory": []
 }
